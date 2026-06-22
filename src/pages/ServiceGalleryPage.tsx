@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeftIcon, PhoneIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowUpRightIcon, PhoneIcon } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { ProjectDetailPage } from './ProjectDetailPage';
 interface ServiceData {
   title: string;
   description: string;
@@ -142,6 +143,29 @@ export function ServiceGalleryPage({
   onContact
 }: ServiceGalleryPageProps) {
   const data = serviceData[serviceType];
+  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+
+  const showProject = (index: number) => {
+    setSelectedProject(index);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (selectedProject !== null) {
+    const projectImages = [...data.images.slice(selectedProject), ...data.images.slice(0, selectedProject)].slice(0, 4);
+    return (
+      <ProjectDetailPage
+        projectTitle={data.images[selectedProject].title}
+        serviceTitle={data.title}
+        images={projectImages}
+        onBack={() => {
+          setSelectedProject(null);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onContact={onContact}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#FBF8F5]">
       {/* Hero Banner */}
@@ -262,8 +286,10 @@ export function ServiceGalleryPage({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {data.images.map((image, index) =>
-          <motion.div
+          <motion.button
             key={index}
+            type="button"
+            onClick={() => showProject(index)}
             initial={{
               opacity: 0,
               scale: 0.95
@@ -280,17 +306,25 @@ export function ServiceGalleryPage({
               duration: 0.5,
               delay: index * 0.07
             }}
-            className="group relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer">
+            className="group relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer text-left shadow-sm focus:outline-none focus:ring-4 focus:ring-[#C41E3A]/30">
             
               <img
               src={image.src}
               alt={image.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                <h3 className="text-white text-lg font-bold">{image.title}</h3>
+              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/10 to-transparent p-5">
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Отвори пројекат</p>
+                    <h3 className="text-lg font-bold text-white">{image.title}</h3>
+                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#C41E3A] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                    <ArrowUpRightIcon className="h-5 w-5" />
+                  </span>
+                </div>
               </div>
-            </motion.div>
+            </motion.button>
           )}
         </div>
       </div>
