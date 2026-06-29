@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeftIcon, PhoneIcon } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+// import f from '../../dist/dist/elegantaSpavacaSoba1.png'
 
 interface ProjectImage {
   src: string;
