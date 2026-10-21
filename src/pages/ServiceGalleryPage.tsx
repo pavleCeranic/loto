@@ -1,67 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeftIcon, ArrowUpRightIcon, PhoneIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowUpRightIcon, PhoneIcon, ImagesIcon } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { ProjectDetailPage } from './ProjectDetailPage';
-import { serviceProjectAssets } from '../data/projectAssets';
-
-interface ServiceData {
-  title: string;
-  description: string;
-  longDescription: string;
-}
-
-const serviceData: Record<'kuhinje' | 'ormari' | 'namjestaj' | 'spavace', ServiceData> = {
-  kuhinje: {
-    title: 'Кухиње по мјери',
-    description: 'Од једноставних до сложених архитектонских пројеката. Радимо са иверицом, МДФ-ом, компакт плочама, судоперима и ручкицама по вашем избору.',
-    longDescription: 'Сваку кухињу израђујемо према вашим потребама и жељама. Ви бирате материјале и произвођача — од економичних рјешења до премиум завршних обрада. Радимо са свим врстама плочастих материјала: иверица, МДФ, компакт плоче, као и судопери, славине и ручкице водећих произвођача. Било да имате готов архитектонски пројекат или само идеју — ми ћемо је претворити у стварност.'
-  },
-  ormari: {
-    title: 'Уградбени ормари',
-    description: 'Максимално искористите сваки центиметар простора. Клизни системи, walk-in ормари и организатори.',
-    longDescription: 'Уградбени ормари су наша специјалност. Сваки орман пројектујемо тако да максимално искористи ваш простор — укључујући косине, нише и нестандардне димензије. Ви бирате материјале, боје, врсту отварања (клизна или класична врата) и унутрашњу организацију. Прилагођавамо се вашем буџету — од економичних до премиум рјешења. И након уградње, ту смо за накнадне измјене.'
-  },
-  namjestaj: {
-    title: 'Намјештај за дом',
-    description: 'Комоде, регали, купаонски намјештај и спаваће собе. Комбинујемо више врста материјала према вашој жељи.',
-    longDescription: 'Израђујемо све врсте намјештаја за ваш дом — од комода и регала до купаонских гарнитура и комплетних спаваћих соба. Комбинујемо различите материјале (иверицу, МДФ, компакт плоче) према вашој жељи и буџету. Ви бирате произвођача материјала. Доступни смо и након уградње — ако је потребна измјена, поправка или додатак, ту смо за вас.'
-  },
-  spavace: {
-    title: 'Кухиње по мјери',
-    description: 'Од једноставних до сложених архитектонских пројеката. Радимо са иверицом, МДФ-ом, компакт плочама, судоперима и ручкицама по вашем избору.',
-    longDescription: 'Сваку кухињу израђујемо према вашим потребама и жељама. Ви бирате материјале и произвођача — од економичних рјешења до премиум завршних обрада. Радимо са свим врстама плочастих материјала: иверица, МДФ, компакт плоче, као и судопери, славине и ручкице водећих произвођача. Било да имате готов архитектонски пројекат или само идеју — ми ћемо је претворити у стварност.'
-  },
-};
+import { CategoryId, categories, getCategoryCover, getProjectsByCategory } from '../data/projects';
 
 interface ServiceGalleryPageProps {
-  serviceType: 'kuhinje' | 'ormari' | 'namjestaj' | 'spavace';
+  serviceType: CategoryId;
+  /** Otvoreni projekat (iz adrese, npr. #/kuhinje/01-kuhinja-siva-hrast) */
+  projectId?: string;
+  onOpenProject: (projectId: string) => void;
+  onCloseProject: () => void;
   onBack: () => void;
   onContact: () => void;
 }
 
-export function ServiceGalleryPage({ serviceType, onBack, onContact }: ServiceGalleryPageProps) {
-  const data = serviceData[serviceType];
-  const assets = serviceProjectAssets[serviceType];
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+const photoLabel = (count: number) => {
+  const lastTwo = count % 100;
+  const last = count % 10;
+  if (last === 1 && lastTwo !== 11) return `${count} фотографија`;
+  if (last >= 2 && last <= 4 && (lastTwo < 12 || lastTwo > 14)) return `${count} фотографије`;
+  return `${count} фотографија`;
+};
 
-  const showProject = (index: number) => {
-    setSelectedProject(index);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+export function ServiceGalleryPage({
+  serviceType,
+  projectId,
+  onOpenProject,
+  onCloseProject,
+  onBack,
+  onContact
+}: ServiceGalleryPageProps) {
+  const data = categories[serviceType];
+  const categoryProjects = getProjectsByCategory(serviceType);
+  const selectedIndex = projectId ? categoryProjects.findIndex((p) => p.id === projectId) : -1;
 
-  if (selectedProject !== null) {
-    const projectImages = [...assets.images.slice(selectedProject), ...assets.images.slice(0, selectedProject)].slice(0, 4);
+  if (selectedIndex !== -1) {
+    const project = categoryProjects[selectedIndex];
+    const nextProject =
+      categoryProjects.length > 1 ? categoryProjects[(selectedIndex + 1) % categoryProjects.length] : undefined;
 
     return (
       <ProjectDetailPage
-        projectTitle={assets.images[selectedProject].title}
+        key={project.id}
+        project={project}
         serviceTitle={data.title}
-        images={projectImages}
-        onBack={() => {
-          setSelectedProject(null);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
+        nextProject={nextProject}
+        onOpenProject={onOpenProject}
+        onBack={onCloseProject}
         onContact={onContact}
       />
     );
@@ -70,7 +56,7 @@ export function ServiceGalleryPage({ serviceType, onBack, onContact }: ServiceGa
   return (
     <div className="min-h-screen bg-[#FBF8F5]">
       <div className="relative h-[50vh] overflow-hidden md:h-[60vh]">
-        <img src={assets.heroImage} alt={data.title} className="h-full w-full object-cover" />
+        <img src={getCategoryCover(serviceType, 'src')} alt={data.title} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
 
         <div className="absolute inset-0 flex flex-col justify-end">
@@ -130,38 +116,53 @@ export function ServiceGalleryPage({ serviceType, onBack, onContact }: ServiceGa
           Галерија пројеката
         </motion.h2>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {assets.images.map((image, index) => (
-            <motion.button
-              key={image.src}
-              type="button"
-              onClick={() => showProject(index)}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: index * 0.07 }}
-              className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl text-left shadow-sm focus:outline-none focus:ring-4 focus:ring-[#C41E3A]/30"
-            >
-              <img
-                src={image.src}
-                alt={image.title}
-                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
+        {categoryProjects.length === 0 ? (
+          <div className="rounded-xl border border-dashed border-gray-300 bg-white px-6 py-14 text-center">
+            <ImagesIcon className="mx-auto mb-4 h-8 w-8 text-[#C41E3A]" />
+            <h3 className="mb-2 text-lg font-bold text-gray-900">Галерија се ускоро допуњује</h3>
+            <p className="mx-auto max-w-md text-gray-600">
+              Фотографије завршених радова из ове категорије стижу ускоро. Јавите нам се — радо ћемо вам показати
+              примјере у нашој канцеларији.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {categoryProjects.map((project, index) => (
+              <motion.button
+                key={project.id}
+                type="button"
+                onClick={() => onOpenProject(project.id)}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: index * 0.07 }}
+                className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-xl text-left shadow-sm focus:outline-none focus:ring-4 focus:ring-[#C41E3A]/30"
+              >
+                <img
+                  src={project.cover.thumb}
+                  alt={project.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
 
-              <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/10 to-transparent p-5">
-                <div className="flex items-end justify-between gap-4">
-                  <div>
-                    <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">Отвори пројекат</p>
-                    <h3 className="text-lg font-bold text-white">{image.title}</h3>
+                <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/10 to-transparent p-5">
+                  <div className="flex items-end justify-between gap-4">
+                    <div>
+                      <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
+                        {photoLabel(project.images.length)}
+                        {project.location ? ` · ${project.location}` : ''}
+                      </p>
+                      <h3 className="text-lg font-bold text-white">{project.title}</h3>
+                    </div>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#C41E3A] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
+                      <ArrowUpRightIcon className="h-5 w-5" />
+                    </span>
                   </div>
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#C41E3A] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
-                    <ArrowUpRightIcon className="h-5 w-5" />
-                  </span>
                 </div>
-              </div>
-            </motion.button>
-          ))}
-        </div>
+              </motion.button>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="bg-[#C41E3A]">

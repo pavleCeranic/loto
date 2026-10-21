@@ -52,8 +52,8 @@ export const serviceProjectAssets: Record<'kuhinje' | 'ormari' | 'namjestaj' | '
   spavace: {
     heroImage: makeAsset('kuhinje/hero.jpg'),
     images: [
-      { src: makeAsset('spavace/01.png'), title: 'Модерна бијела кухиња' },
-      { src: makeAsset('kuhinje/02.jpg'), title: 'Рустикална кухиња' },
+      { src: makeAsset('/spavace/01.jpg'), title: 'Модерна бијела кухиња' },
+      { src: makeAsset('/kuhinje/02.jpg'), title: 'Рустикална кухиња' },
       { src: makeAsset('kuhinje/03.jpg'), title: 'Кухиња са острвом' },
       { src: makeAsset('kuhinje/04.jpg'), title: 'Минималистичка кухиња' },
       { src: makeAsset('kuhinje/05.jpg'), title: 'Кухиња у тамним тоновима' },

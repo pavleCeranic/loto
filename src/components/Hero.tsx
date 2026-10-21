@@ -2,6 +2,9 @@ import React from 'react';
 import { Button } from './ui/Button';
 import { motion } from 'framer-motion';
 import { UserCheck, MonitorCheck, Grid2x2Check, ArrowRight } from 'lucide-react';
+import heroKitchen from '../assets/hero/hero-kuhinja.jpg?w=1400&format=webp&quality=88&imagetools';
+import heroTvWall from '../assets/hero/hero-tv-zid.jpg?w=900&format=webp&quality=88&imagetools';
+import heroDarkKitchen from '../assets/hero/hero-tamna-kuhinja.jpg?w=1600&format=webp&quality=88&imagetools';
 export function Hero() {
   return (
     <div className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#FBF8F5]">
@@ -98,10 +101,21 @@ export function Hero() {
             className="relative">
 
             <div className="relative aspect-[4/5] md:aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&q=80&w=2070"
-                alt="Производња плочастог намјештаја по мјери"
-                className="w-full h-full object-cover" />
+              {/* Kolaž stvarnih radova (slike su obrađene za naslovnu: src/assets/hero) */}
+              <div className="grid h-full w-full grid-cols-[3fr_2fr] grid-rows-2 gap-2 bg-white">
+                <img
+                  src={heroKitchen}
+                  alt="Кухиња по мјери са витринама у плавој и храсту"
+                  className="row-span-2 h-full w-full object-cover" />
+                <img
+                  src={heroTvWall}
+                  alt="ТВ зид у храсту са LED освјетљењем"
+                  className="h-full w-full object-cover" />
+                <img
+                  src={heroDarkKitchen}
+                  alt="Тамна кухиња са острвом у храсту"
+                  className="h-full w-full object-cover" />
+              </div>
 
 
               {/* Floating Badge */}

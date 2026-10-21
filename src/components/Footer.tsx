@@ -1,11 +1,27 @@
 import React from 'react';
 import { Facebook, Instagram } from 'lucide-react';
 
-type PageType = 'home' | 'kuhinje' | 'ormari' | 'namjestaj' | 'aboutus';
+import type { PageType } from '../App';
+import { categories, categoryOrder, getProjectsByCategory } from '../data/projects';
+import { mapsSearchUrl, siteInfo } from '../data/siteInfo';
 
 interface FooterProps {
   onNavigate?: (page: PageType) => void;
 }
+
+const linkClass = 'text-gray-400 hover:text-white transition-colors';
+
+// "#sekcija" linkovi rade sa svake stranice: App ih prepoznaje i vraća na naslovnu
+const quickLinks = [
+  { label: 'Услуге', href: '#usluge' },
+  { label: 'Процес рада', href: '#proces' },
+  { label: 'Галерија радова', href: '#galerija' },
+  { label: 'Локација и радно вријеме', href: '#lokacija' },
+  { label: 'Контакт', href: '#kontakt' }
+];
+
+// Prikazuju se samo kategorije koje imaju bar jedan projekat
+const serviceLinks = categoryOrder.filter((id) => getProjectsByCategory(id).length > 0);
 
 export function Footer({ onNavigate }: FooterProps) {
   return (
@@ -14,7 +30,13 @@ export function Footer({ onNavigate }: FooterProps) {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div>
-            <a href="#" className="mb-6 block">
+            <a
+              href="#/"
+              className="mb-6 block"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate?.('home');
+              }}>
               <img
                 src="/logo_jocin.svg"
                 alt="ЛОТО"
@@ -26,15 +48,19 @@ export function Footer({ onNavigate }: FooterProps) {
             </p>
             <div className="flex gap-4">
               <a
-                href="https://www.facebook.com/Enterijerilotonamjestaj/"
+                href={siteInfo.social.facebook}
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C41E3A] transition-all"
-                target="_blank">
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook">
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://www.instagram.com/loto.namjestaj/"
+                href={siteInfo.social.instagram}
                 className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#C41E3A] transition-all"
-                target="_blank">
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -46,40 +72,22 @@ export function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-4">
               <li>
                 <a
-                  href="#o-nama"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  href="#/o-nama"
+                  className={linkClass}
                   onClick={(e) => {
                     e.preventDefault();
                     onNavigate?.('aboutus');
                   }}>
-
                   О нама
                 </a>
               </li>
-              <li>
-                <a
-                  href="#usluge"
-                  className="text-gray-400 hover:text-white transition-colors">
-
-                  Услуге
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#galerija"
-                  className="text-gray-400 hover:text-white transition-colors">
-
-                  Галерија радова
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#kontakt"
-                  className="text-gray-400 hover:text-white transition-colors">
-
-                  Контакт
-                </a>
-              </li>
+              {quickLinks.map((link) =>
+              <li key={link.href}>
+                  <a href={link.href} className={linkClass}>
+                    {link.label}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -87,11 +95,19 @@ export function Footer({ onNavigate }: FooterProps) {
           <div>
             <h3 className="text-lg font-bold mb-6">Услуге</h3>
             <ul className="space-y-4">
-              <li className="text-gray-400">Кухиње по мјери</li>
-              <li className="text-gray-400">Уградбени ормари</li>
-              <li className="text-gray-400">Дневни боравци</li>
-              <li className="text-gray-400">Канцеларијски намјештај</li>
-              <li className="text-gray-400">Опремање апартмана</li>
+              {serviceLinks.map((id) =>
+              <li key={id}>
+                  <a
+                    href={`#/${id}`}
+                    className={linkClass}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate?.(id);
+                    }}>
+                    {categories[id].title}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -99,10 +115,30 @@ export function Footer({ onNavigate }: FooterProps) {
           <div>
             <h3 className="text-lg font-bold mb-6">Контакт</h3>
             <ul className="space-y-4">
-              <li className="text-gray-400">Пиланска улица</li>
-              <li className="text-gray-400">78000 Бањалука, БиХ</li>
-              <li className="text-gray-400 pt-2">+387 51 234 567</li>
-              <li className="text-gray-400">info@loto-namjestaj.ba</li>
+              <li>
+                <a href={mapsSearchUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                  {siteInfo.address.street}
+                  <br />
+                  {siteInfo.address.city}, БиХ
+                </a>
+              </li>
+              <li className="text-gray-400 text-sm">
+                {siteInfo.hours.map((h) =>
+                <span key={h.days} className="block">
+                    {h.days}: <span className="text-gray-300">{h.time}</span>
+                  </span>
+                )}
+              </li>
+              <li>
+                <a href={`tel:${siteInfo.phone.tel}`} className={linkClass}>
+                  {siteInfo.phone.display}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${siteInfo.email}`} className={linkClass}>
+                  {siteInfo.email}
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -111,14 +147,9 @@ export function Footer({ onNavigate }: FooterProps) {
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Лото Намјештај. Сва права задржана.
           </p>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">
-              Приватност
-            </a>
-            <a href="#" className="hover:text-white transition-colors">
-              Услови коришћења
-            </a>
-          </div>
+          <p className="text-gray-500 text-sm">
+            Пројектовање, производња и монтажа намјештаја по мјери · Бањалука
+          </p>
         </div>
       </div>
     </footer>);

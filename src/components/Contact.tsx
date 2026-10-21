@@ -8,33 +8,34 @@ import {
   FacebookIcon,
   InstagramIcon } from
 'lucide-react';
+import { siteInfo } from '../data/siteInfo';
 const contactMethods = [
 {
   icon: PhoneIcon,
   label: 'Телефон',
-  value: '+387 51 234 567',
-  href: 'tel:+38751234567',
+  value: siteInfo.phone.display,
+  href: `tel:${siteInfo.phone.tel}`,
   description: 'Позовите нас радним данима'
 },
 {
   icon: MailIcon,
   label: 'Емаил',
-  value: 'info@loto-namjestaj.ba',
-  href: 'mailto:info@loto-namjestaj.ba',
+  value: siteInfo.email,
+  href: `mailto:${siteInfo.email}`,
   description: 'Пошаљите нам поруку'
 },
 {
   icon: MessageCircleIcon,
   label: 'WhatsApp',
-  value: '+387 51 234 567',
-  href: 'https://wa.me/38751234567',
+  value: siteInfo.mobile.display,
+  href: `https://wa.me/${siteInfo.mobile.international}`,
   description: 'Брза комуникација'
 },
 {
   icon: MessageCircleIcon,
   label: 'Viber',
-  value: '+387 51 234 567',
-  href: 'viber://chat?number=+38751234567',
+  value: siteInfo.mobile.display,
+  href: `viber://chat?number=%2B${siteInfo.mobile.international}`,
   description: 'Директна порука'
 }];
 
@@ -42,13 +43,13 @@ const socialLinks = [
 {
   icon: FacebookIcon,
   label: 'Facebook',
-  href: 'https://www.facebook.com/Enterijerilotonamjestaj/',
+  href: siteInfo.social.facebook,
   color: 'hover:bg-[#1877F2]'
 },
 {
   icon: InstagramIcon,
   label: 'Instagram',
-  href: 'https://www.instagram.com/loto.namjestaj/',
+  href: siteInfo.social.instagram,
   color:
   'hover:bg-gradient-to-br hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF]'
 }];

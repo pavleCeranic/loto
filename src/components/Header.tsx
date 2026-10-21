@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
 import { Button } from './ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
-type PageType = 'home' | 'kuhinje' | 'ormari' | 'namjestaj' | 'aboutus';
+import type { PageType } from '../App';
 interface HeaderProps {
   onNavigate: (page: PageType) => void;
   currentPage: PageType;
@@ -17,35 +17,23 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
+  const goToSection = (href: string) => {
     if (currentPage !== 'home') {
-      onNavigate('home');
-      setTimeout(() => {
-        document.querySelector(href)?.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }, 100);
+      // App prepoznaje "#sekcija" kao naslovnu i skroluje do sekcije
+      window.location.hash = href;
     } else {
       document.querySelector(href)?.scrollIntoView({
         behavior: 'smooth'
       });
     }
   };
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    goToSection(href);
+  };
   const handleContactClick = () => {
     setIsMobileMenuOpen(false);
-    if (currentPage !== 'home') {
-      onNavigate('home');
-      setTimeout(() => {
-        document.getElementById('kontakt')?.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }, 100);
-    } else {
-      document.getElementById('kontakt')?.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    goToSection('#kontakt');
   };
   const handleAboutClick = () => {
     setIsMobileMenuOpen(false);

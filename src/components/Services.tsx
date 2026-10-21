@@ -2,8 +2,13 @@ import React from 'react';
 import { Section } from './ui/Section';
 import { CookingPot, Ruler, ArrowRight, BedDouble, Bath, Lamp, Columns3, LampDesk,  } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { CategoryId, categoryOrder, getCategoryCover, getProjectsByCategory } from '../data/projects';
+
+// Kategorije bez ijednog projekta se ne prikazuju (pojaviće se same kad se dodaju slike)
+const isVisible = (category: CategoryId) => getProjectsByCategory(category).length > 0;
+const visibleCount = categoryOrder.filter(isVisible).length;
 interface ServicesProps {
-  onNavigate: (page: 'kuhinje' | 'ormari' | 'namjestaj') => void;
+  onNavigate: (page: CategoryId) => void;
 }
 export function Services({ onNavigate }: ServicesProps) {
   return (
@@ -19,7 +24,7 @@ export function Services({ onNavigate }: ServicesProps) {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className={`grid gap-8 ${visibleCount === 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'}`}>
         {/* Кухиње по мјери */}
         <motion.div
           initial={{
@@ -42,7 +47,7 @@ export function Services({ onNavigate }: ServicesProps) {
           <div className="relative h-64 mb-6 overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
             <img
-              src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=1000"
+              src={getCategoryCover('kuhinje')}
               alt="Кухиње по мјери"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
 
@@ -78,12 +83,12 @@ export function Services({ onNavigate }: ServicesProps) {
             delay: 0.1
           }}
           className="group cursor-pointer"
-          onClick={() => onNavigate('ormari')}>
+          onClick={() => onNavigate('dnevne-sobe')}>
 
           <div className="relative h-64 mb-6 overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
             <img
-              src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=1000"
+              src={getCategoryCover('dnevne-sobe')}
               alt="Уградбени ормари"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
 
@@ -119,12 +124,12 @@ export function Services({ onNavigate }: ServicesProps) {
             delay: 0.2
           }}
           className="group cursor-pointer"
-          onClick={() => onNavigate('namjestaj')}>
+          onClick={() => onNavigate('plakari-hodnici')}>
 
           <div className="relative h-64 mb-6 overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
             <img
-              src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=1000"
+              src={getCategoryCover('plakari-hodnici')}
               alt="Намјештај за дом"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
 
@@ -143,6 +148,7 @@ export function Services({ onNavigate }: ServicesProps) {
           </div>
         </motion.div>
 
+        {isVisible('kupatila') && (<>
         {/* Купатила */}
         <motion.div
           initial={{
@@ -160,12 +166,12 @@ export function Services({ onNavigate }: ServicesProps) {
             delay: 0.2
           }}
           className="group cursor-pointer"
-          onClick={() => onNavigate('namjestaj')}>
+          onClick={() => onNavigate('kupatila')}>
 
           <div className="relative h-64 mb-6 overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
             <img
-              src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=1000"
+              src={getCategoryCover('kupatila')}
               alt="Намјештај за дом"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
 
@@ -183,7 +189,7 @@ export function Services({ onNavigate }: ServicesProps) {
             Погледајте пројекте <ArrowRight className="w-4 h-4 ml-1" />
           </div>
         </motion.div>
-
+        </>)}
 
         {/* Спаваће собе */}
         <motion.div
@@ -202,12 +208,12 @@ export function Services({ onNavigate }: ServicesProps) {
             delay: 0.2
           }}
           className="group cursor-pointer"
-          onClick={() => onNavigate('namjestaj')}>
+          onClick={() => onNavigate('spavace-sobe')}>
 
           <div className="relative h-64 mb-6 overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
             <img
-              src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=1000"
+              src={getCategoryCover('spavace-sobe')}
               alt="Намјештај за дом"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
 
@@ -226,6 +232,7 @@ export function Services({ onNavigate }: ServicesProps) {
           </div>
         </motion.div>
 
+        {isVisible('poslovni-prostori') && (<>
         {/* Пословни простори */}
           <motion.div
           initial={{
@@ -243,12 +250,12 @@ export function Services({ onNavigate }: ServicesProps) {
             delay: 0.2
           }}
           className="group cursor-pointer"
-          onClick={() => onNavigate('namjestaj')}>
+          onClick={() => onNavigate('poslovni-prostori')}>
 
           <div className="relative h-64 mb-6 overflow-hidden rounded-xl">
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10" />
             <img
-              src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=1000"
+              src={getCategoryCover('poslovni-prostori')}
               alt="Намјештај за дом"
               className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" />
 
@@ -266,7 +273,9 @@ export function Services({ onNavigate }: ServicesProps) {
             Погледајте пројекте <ArrowRight className="w-4 h-4 ml-1" />
           </div>
         </motion.div>
+        </>)}
 
+        
       </div>
     </Section>);
 

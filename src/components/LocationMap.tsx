@@ -1,11 +1,12 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { Section } from './ui/Section';
 import { motion } from 'framer-motion';
 import { MapPinIcon, ClockIcon, EyeIcon, RulerIcon } from 'lucide-react';
 import { Button } from './ui/Button';
+import { mapsEmbedUrl, mapsSearchUrl, siteInfo } from '../data/siteInfo';
 export function LocationMap() {
   return (
-    <Section background="light">
+    <Section id="lokacija" background="light">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         {/* Left side - Map */}
         <motion.div
@@ -27,7 +28,7 @@ export function LocationMap() {
           
           <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3] bg-gray-100">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2871.5!2d17.19!3d44.77!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDTCsDQ2JzEzLjIiTiAxN8KwMTEnMjQuMCJF!5e0!3m2!1sen!2sba!4v1234567890"
+              src={mapsEmbedUrl}
               width="100%"
               height="100%"
               style={{
@@ -65,7 +66,7 @@ export function LocationMap() {
           
           <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#C41E3A]/10 text-[#C41E3A] text-sm font-semibold mb-4">
             <MapPinIcon className="w-3 h-3 mr-2" />
-            Пиланска улица, Бањалука
+            {siteInfo.address.street}, Бањалука
           </div>
 
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-6 tracking-tight">
@@ -136,25 +137,34 @@ export function LocationMap() {
             </motion.div>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-sm mb-8">
-            <div className="flex items-center gap-3 mb-3">
-              <ClockIcon className="w-5 h-5 text-[#C41E3A]" />
-              <h3 className="font-bold text-gray-900">Радно вријеме</h3>
-            </div>
-            <div className="space-y-1 text-gray-600">
-              <p>
-                Понедјељак - Петак:{' '}
-                <span className="font-semibold text-gray-900">
-                  08:00 - 16:00
-                </span>
-              </p>
-              <p>
-                Субота:{' '}
-                <span className="font-semibold text-gray-900">
-                  09:00 - 13:00
-                </span>
-              </p>
-              <p className="text-sm text-gray-500 mt-2">Недјеља: Затворено</p>
+          {/* Adresa i radno vrijeme */}
+          <div className="mb-8 grid overflow-hidden rounded-xl bg-white shadow-sm sm:grid-cols-2">
+            <a
+              href={mapsSearchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group border-b border-gray-100 p-6 transition-colors hover:bg-[#C41E3A]/5 sm:border-b-0 sm:border-r">
+              <div className="mb-3 flex items-center gap-3">
+                <MapPinIcon className="h-5 w-5 text-[#C41E3A]" />
+                <h3 className="font-bold text-gray-900">Адреса</h3>
+              </div>
+              <p className="text-xl font-extrabold leading-snug text-gray-900">{siteInfo.address.street}</p>
+              <p className="text-gray-600">{siteInfo.address.city}</p>
+              <p className="mt-3 text-sm font-semibold text-[#C41E3A] group-hover:underline">Отвори у Google мапама →</p>
+            </a>
+            <div className="p-6">
+              <div className="mb-3 flex items-center gap-3">
+                <ClockIcon className="h-5 w-5 text-[#C41E3A]" />
+                <h3 className="font-bold text-gray-900">Радно вријеме</h3>
+              </div>
+              <div className="space-y-1 text-gray-600">
+                {siteInfo.hours.map((h) =>
+                <p key={h.days} className="flex justify-between gap-4">
+                    <span>{h.days}</span>
+                    <span className="whitespace-nowrap font-semibold text-gray-900">{h.time}</span>
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -162,10 +172,7 @@ export function LocationMap() {
             <Button
               size="lg"
               onClick={() =>
-              window.open(
-                'https://www.google.com/maps/search/?api=1&query=Pilanska+ulica+Banja+Luka',
-                '_blank'
-              )
+              window.open(mapsSearchUrl, '_blank', 'noopener')
               }>
               
               Упутства за долазак
