@@ -27,9 +27,9 @@ export function Footer({ onNavigate }: FooterProps) {
   return (
     <footer className="bg-[#2C1810] text-white pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 mb-12 lg:grid-cols-4 lg:gap-12 lg:mb-16">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <a
               href="#/"
               className="mb-6 block"
@@ -68,8 +68,8 @@ export function Footer({ onNavigate }: FooterProps) {
 
           {/* Links */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Брзи линкови</h3>
-            <ul className="space-y-4">
+            <h3 className="text-base font-bold mb-4 md:text-lg md:mb-6">Брзи линкови</h3>
+            <ul className="space-y-3 md:space-y-4">
               <li>
                 <a
                   href="#/o-nama"
@@ -93,8 +93,8 @@ export function Footer({ onNavigate }: FooterProps) {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-6">Услуге</h3>
-            <ul className="space-y-4">
+            <h3 className="text-base font-bold mb-4 md:text-lg md:mb-6">Услуге</h3>
+            <ul className="space-y-3 md:space-y-4">
               {serviceLinks.map((id) =>
               <li key={id}>
                   <a
@@ -112,9 +112,9 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
 
           {/* Contact */}
-          <div>
-            <h3 className="text-lg font-bold mb-6">Контакт</h3>
-            <ul className="space-y-4">
+          <div className="col-span-2 lg:col-span-1">
+            <h3 className="text-base font-bold mb-4 md:text-lg md:mb-6">Контакт</h3>
+            <ul className="space-y-3 md:space-y-4">
               <li>
                 <a href={mapsSearchUrl} target="_blank" rel="noopener noreferrer" className={linkClass}>
                   {siteInfo.address.street}
@@ -143,7 +143,7 @@ export function Footer({ onNavigate }: FooterProps) {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Лото Намјештај. Сва права задржана.
           </p>

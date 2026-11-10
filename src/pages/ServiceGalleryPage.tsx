@@ -55,7 +55,7 @@ export function ServiceGalleryPage({
 
   return (
     <div className="min-h-screen bg-[#FBF8F5]">
-      <div className="relative h-[50vh] overflow-hidden md:h-[60vh]">
+      <div className="relative h-[46vh] min-h-[340px] overflow-hidden md:h-[60vh]">
         <img src={getCategoryCover(serviceType, 'src')} alt={data.title} className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/10" />
 
@@ -76,7 +76,7 @@ export function ServiceGalleryPage({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4 text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl"
+              className="mb-3 text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:mb-4 md:text-5xl lg:text-6xl"
             >
               {data.title}
             </motion.h1>
@@ -85,7 +85,7 @@ export function ServiceGalleryPage({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="max-w-2xl text-lg text-white/80 md:text-xl"
+              className="max-w-2xl text-base text-white/85 sm:text-lg md:text-xl"
             >
               {data.description}
             </motion.p>
@@ -93,7 +93,7 @@ export function ServiceGalleryPage({
         </div>
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4 py-16 md:px-6 md:py-20">
+      <div className="container mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ export function ServiceGalleryPage({
           transition={{ duration: 0.6 }}
           className="max-w-3xl"
         >
-          <p className="text-lg leading-relaxed text-gray-600 md:text-xl">{data.longDescription}</p>
+          <p className="text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">{data.longDescription}</p>
         </motion.div>
       </div>
 
@@ -182,7 +182,7 @@ export function ServiceGalleryPage({
                 Бесплатна консултација и измјера. Прилагођавамо се вашем буџету и жељама.
               </p>
             </div>
-            <div className="flex flex-shrink-0 gap-4">
+            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-shrink-0 sm:flex-row sm:gap-4">
               <Button variant="secondary" size="lg" onClick={onContact}>
                 <PhoneIcon className="mr-2 h-5 w-5" />
                 Контактирајте нас

@@ -42,8 +42,8 @@ export function LocationMap() {
           </div>
 
           {/* Decorative accents */}
-          <div className="absolute -bottom-6 -right-6 w-40 h-40 bg-[#C41E3A]/10 rounded-2xl -z-10" />
-          <div className="absolute -top-6 -left-6 w-32 h-32 bg-white rounded-2xl -z-10 shadow-lg" />
+          <div className="absolute -bottom-6 -right-6 hidden w-40 h-40 bg-[#C41E3A]/10 rounded-2xl -z-10 md:block" />
+          <div className="absolute -top-6 -left-6 hidden w-32 h-32 bg-white rounded-2xl -z-10 shadow-lg md:block" />
         </motion.div>
 
         {/* Right side - Showroom Info */}
@@ -168,7 +168,7 @@ export function LocationMap() {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
             <Button
               size="lg"
               onClick={() =>

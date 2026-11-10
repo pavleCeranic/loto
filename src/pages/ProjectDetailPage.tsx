@@ -55,24 +55,24 @@ export function ProjectDetailPage({ project, serviceTitle, nextProject, onOpenPr
 
   return (
     <article className="min-h-screen bg-[#F7F4EF]">
-      <header className="relative min-h-[78vh] overflow-hidden bg-[#2C1810]">
+      <header className="relative min-h-[62vh] overflow-hidden bg-[#2C1810] md:min-h-[78vh]">
         <img src={images[0].src} alt={title} className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/20" />
-        <div className="relative container mx-auto flex min-h-[78vh] max-w-7xl flex-col justify-end px-4 pb-14 pt-32 md:px-6 md:pb-20">
-          <motion.button initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} onClick={onBack} className="mb-8 inline-flex w-fit items-center gap-2 text-sm font-semibold text-white/80 hover:text-white">
+        <div className="relative container mx-auto flex min-h-[62vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-28 md:min-h-[78vh] md:px-6 md:pb-20 md:pt-32">
+          <motion.button initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }} onClick={onBack} className="mb-6 inline-flex w-fit items-center gap-2 py-1 text-sm font-semibold text-white/80 hover:text-white md:mb-8">
             <ArrowLeftIcon className="h-4 w-4" /> Назад на пројекте
           </motion.button>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-white/70">{serviceTitle} · Пројекат</p>
-          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl text-4xl font-extrabold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-white/70 md:mb-4 md:text-xs md:tracking-[0.28em]">{serviceTitle} · Пројекат</p>
+          <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl md:text-6xl lg:text-7xl">
             {title}
           </motion.h1>
         </div>
       </header>
 
-      <section className="container mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-[1fr_2fr] md:px-6 md:py-24">
+      <section className="container mx-auto grid max-w-7xl gap-5 px-4 py-12 md:grid-cols-[1fr_2fr] md:gap-10 md:px-6 md:py-24">
         <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C41E3A]">О пројекту</p>
         <div>
-          <p className="max-w-3xl text-2xl font-medium leading-relaxed text-gray-900 md:text-3xl">{project.description ?? defaultDescription}</p>
+          <p className="max-w-3xl text-lg font-medium leading-relaxed text-gray-900 sm:text-xl md:text-3xl">{project.description ?? defaultDescription}</p>
           <div className="mt-10 grid gap-6 border-t border-black/10 pt-6 text-sm sm:grid-cols-3">
             {facts.map((fact) => (
               <div key={fact.label}><span className="block text-gray-500">{fact.label}</span><strong>{fact.value}</strong></div>
@@ -82,10 +82,10 @@ export function ProjectDetailPage({ project, serviceTitle, nextProject, onOpenPr
       </section>
 
       {/* Fotografije u prirodnim proporcijama (bez sječenja), u dvije kolone */}
-      <section className="container mx-auto max-w-7xl px-4 pb-24 md:px-6">
+      <section className="container mx-auto max-w-7xl px-4 pb-6 md:pb-24 md:px-6">
         <div className={images.length > 1 ? 'gap-8 md:columns-2' : 'mx-auto max-w-4xl'}>
           {images.map((image, index) => (
-            <motion.figure key={image.file} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6 }} className="mb-10 break-inside-avoid md:mb-14">
+            <motion.figure key={image.file} initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6 }} className="mb-8 break-inside-avoid md:mb-14">
               <button
                 type="button"
                 onClick={() => setLightboxIndex(index)}
@@ -112,17 +112,17 @@ export function ProjectDetailPage({ project, serviceTitle, nextProject, onOpenPr
       </section>
 
       {nextProject && (
-        <section className="container mx-auto max-w-7xl px-4 pb-24 md:px-6">
+        <section className="container mx-auto max-w-7xl px-4 pb-14 md:pb-24 md:px-6">
           <button
             type="button"
             onClick={() => onOpenProject(nextProject.id)}
-            className="group grid w-full items-center gap-6 border-t border-black/10 pt-8 text-left md:grid-cols-[1fr_auto]"
+            className="group grid w-full items-center gap-6 border-t border-black/10 pt-6 text-left md:pt-8 md:grid-cols-[1fr_auto]"
           >
             <div className="flex items-center gap-6">
-              <img src={nextProject.cover.thumb} alt={nextProject.title} loading="lazy" className="h-24 w-32 shrink-0 rounded-lg object-cover md:h-28 md:w-40" />
+              <img src={nextProject.cover.thumb} alt={nextProject.title} loading="lazy" className="h-20 w-24 shrink-0 rounded-lg object-cover sm:h-24 sm:w-32 md:h-28 md:w-40" />
               <div>
                 <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-gray-500">Сљедећи пројекат</p>
-                <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 transition-colors group-hover:text-[#C41E3A] md:text-3xl">{nextProject.title}</h2>
+                <h2 className="text-xl font-extrabold tracking-tight text-gray-900 transition-colors sm:text-2xl group-hover:text-[#C41E3A] md:text-3xl">{nextProject.title}</h2>
               </div>
             </div>
             <span className="hidden h-12 w-12 items-center justify-center rounded-full bg-[#C41E3A] text-white transition-transform group-hover:translate-x-1 md:flex">
@@ -133,9 +133,9 @@ export function ProjectDetailPage({ project, serviceTitle, nextProject, onOpenPr
       )}
 
       <section className="bg-[#2C1810] text-white">
-        <div className="container mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 md:flex-row md:items-center md:px-6 md:py-20">
-          <div><p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-white/50">Ваш простор</p><h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">Желите слично рјешење по вашој мјери?</h2></div>
-          <Button variant="secondary" size="lg" onClick={onContact}><PhoneIcon className="mr-2 h-5 w-5" /> Разговарајмо о пројекту</Button>
+        <div className="container mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-14 md:flex-row md:items-center md:gap-8 md:px-6 md:py-20">
+          <div><p className="mb-3 text-xs font-bold uppercase tracking-[0.24em] text-white/50">Ваш простор</p><h2 className="max-w-2xl text-2xl font-extrabold tracking-tight sm:text-3xl md:text-4xl">Желите слично рјешење по вашој мјери?</h2></div>
+          <Button variant="secondary" size="lg" onClick={onContact} className="w-full sm:w-auto"><PhoneIcon className="mr-2 h-5 w-5" /> Разговарајмо о пројекту</Button>
         </div>
       </section>
 

@@ -7,12 +7,12 @@ import heroTvWall from '../assets/hero/hero-tv-zid.jpg?w=900&format=webp&quality
 import heroDarkKitchen from '../assets/hero/hero-tamna-kuhinja.jpg?w=1600&format=webp&quality=88&imagetools';
 export function Hero() {
   return (
-    <div className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#FBF8F5]">
+    <div className="relative min-h-screen flex items-center pt-24 pb-14 md:pt-20 md:pb-0 overflow-hidden bg-[#FBF8F5]">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-[#F5E6D3] hidden lg:block" />
 
       <div className="container mx-auto px-4 md:px-6 max-w-7xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Text Content */}
           <motion.div
             initial={{
@@ -28,11 +28,15 @@ export function Hero() {
               ease: 'easeOut'
             }}>
 
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#C41E3A]/10 text-[#C41E3A] text-sm font-bold mb-6">
-              <span className="ml-2 w-2 h-2 rounded-full bg-[#C41E3A] mr-2"></span>
-              5000+ реализованих пројеката
-              <span className="ml-3 w-2 h-2 rounded-full bg-[#C41E3A] mr-2"></span>
-              30+ година искуства
+            <div className="mb-6 flex flex-wrap gap-2">
+              <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[#C41E3A]/10 px-3 py-1 text-xs font-bold text-[#C41E3A] sm:text-sm">
+                <span className="h-2 w-2 rounded-full bg-[#C41E3A]"></span>
+                5000+ реализованих пројеката
+              </span>
+              <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-[#C41E3A]/10 px-3 py-1 text-xs font-bold text-[#C41E3A] sm:text-sm">
+                <span className="h-2 w-2 rounded-full bg-[#C41E3A]"></span>
+                30+ година искуства
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight">
               Ентеријери Лото намјештај
@@ -42,7 +46,7 @@ export function Hero() {
             Преко 30 година искуства у производњи намјештаја по мјери — комплетна реализација од идеје до уградње.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button
                 size="lg"
                 onClick={() =>
@@ -67,17 +71,17 @@ export function Hero() {
               </Button>
             </div>
 
-            <div className="mt-24 flex flex-wrap items-center text-lg md:text-xl text-gray-500 font-medium mb-8 max-w-lg leading-relaxed space-y-5">
-              <div className="flex items-center gap-2">
-                <Grid2x2Check className="ml-2 w-6 h-6 text-[#C41E3A]" />
+            <div className="mt-10 mb-2 flex max-w-lg flex-col gap-3 text-base font-medium leading-snug text-gray-600 md:mt-20 md:mb-8 md:gap-5 md:text-xl md:text-gray-500">
+              <div className="flex items-center gap-3">
+                <Grid2x2Check className="h-5 w-5 shrink-0 text-[#C41E3A] md:h-6 md:w-6" />
                 Широк избор материјала и декора
               </div>
-              <div className="flex items-center gap-2">
-              <MonitorCheck className="ml-2 w-6 h-6 text-[#C41E3A]" />
+              <div className="flex items-center gap-3">
+                <MonitorCheck className="h-5 w-5 shrink-0 text-[#C41E3A] md:h-6 md:w-6" />
                 Рјешења прилагођена вашем буџету
               </div>
-              <div className="flex items-center gap-2">
-              <UserCheck className="ml-2 w-6 h-6 text-[#C41E3A]" />
+              <div className="flex items-center gap-3">
+                <UserCheck className="h-5 w-5 shrink-0 text-[#C41E3A] md:h-6 md:w-6" />
                 Гаранција и подршка након уградње
               </div>
             </div>
@@ -131,12 +135,12 @@ export function Hero() {
                 transition={{
                   delay: 0.6
                 }}
-                className="absolute bottom-4 left-4 md:bottom-8 md:left-8 bg-white p-4 md:p-6 rounded-lg shadow-lg max-w-[280px] md:max-w-xs">
+                className="absolute bottom-3 left-3 md:bottom-8 md:left-8 bg-white p-3 md:p-6 rounded-lg shadow-lg max-w-[190px] sm:max-w-[260px] md:max-w-xs">
 
-                <p className="text-[#C41E3A] font-extrabold text-3xl md:text-4xl mb-1">
+                <p className="text-[#C41E3A] font-extrabold text-2xl md:text-4xl mb-1">
                   30+
                 </p>
-                <p className="text-gray-600 text-xs md:text-sm font-medium">
+                <p className="text-gray-600 text-[11px] leading-snug md:text-sm font-medium">
                   Година искуства у производњи намјештаја врхунске квалитете
                 </p>
               </motion.div>

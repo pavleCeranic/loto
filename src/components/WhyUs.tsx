@@ -64,11 +64,11 @@ export function WhyUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 border-t border-white/20 pt-6">
+        <div className="grid grid-cols-3 gap-3 border-t border-white/20 pt-6">
           {stats.map((stat) =>
           <div key={stat.label}>
-              <strong className="block text-3xl md:text-4xl font-extrabold text-white">{stat.value}</strong>
-              <span className="text-xs md:text-sm text-white/60">{stat.label}</span>
+              <strong className="block text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">{stat.value}</strong>
+              <span className="block text-xs leading-snug md:text-sm text-white/70">{stat.label}</span>
             </div>
           )}
         </div>
@@ -76,14 +76,14 @@ export function WhyUs() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px overflow-hidden rounded-2xl bg-white/20 border border-white/20">
         {features.map((feature, index) =>
-        <div key={index} className="flex flex-col gap-3 bg-[#C41E3A] p-7 md:p-8">
+        <div key={index} className="flex flex-col gap-3 bg-[#C41E3A] p-6 md:p-8">
             <div className="w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center text-[#F5E6D3]">
               <feature.icon className="w-6 h-6" />
             </div>
             <h3 className="text-xl font-bold text-white">
               {feature.title}
             </h3>
-            <p className="text-white/60 text-sm leading-relaxed">
+            <p className="text-white/75 text-sm leading-relaxed">
               {feature.description}
             </p>
           </div>

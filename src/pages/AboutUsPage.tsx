@@ -129,7 +129,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
         <div className="absolute inset-0 bg-gradient-to-r from-[#211510]/95 via-[#211510]/70 to-[#211510]/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#211510]/90 via-transparent to-black/20" />
 
-        <div className="relative container mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-between px-4 pb-12 pt-28 md:px-6 md:pb-16 md:pt-32">
+        <div className="relative container mx-auto flex min-h-[88vh] max-w-7xl flex-col justify-between gap-10 px-4 pb-10 pt-24 md:px-6 md:pb-16 md:pt-32">
           <motion.button
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
@@ -143,7 +143,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-6 text-xs font-bold uppercase tracking-[0.3em] text-[#E4B37B]">
               Лото намјештај · Бањалука
             </motion.p>
-            <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="text-5xl font-black leading-[0.98] tracking-[-0.04em] md:text-7xl lg:text-8xl">
+            <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="text-[2.5rem] font-black leading-[1.02] tracking-[-0.03em] sm:text-5xl md:text-7xl md:tracking-[-0.04em] lg:text-8xl">
               Три деценије рада.<br />Од идеје до реализације.
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.16 }} className="mt-7 max-w-2xl text-lg leading-relaxed text-white/75 md:text-xl">
@@ -151,10 +151,10 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
             </motion.p>
           </div>
 
-          <div className="mt-14 grid max-w-3xl grid-cols-3 border-t border-white/20 pt-6">
-            <div><strong className="block text-3xl md:text-5xl">30+</strong><span className="text-xs text-white/55 md:text-sm">година искуства</span></div>
-            <div><strong className="block text-3xl md:text-5xl">5000+</strong><span className="text-xs text-white/55 md:text-sm">урађених кухиња</span></div>
-            <div><strong className="block text-3xl md:text-5xl">2010.</strong><span className="text-xs text-white/55 md:text-sm">признање „Златни дуб“</span></div>
+          <div className="mt-6 grid max-w-3xl grid-cols-3 gap-3 border-t border-white/20 pt-6 md:mt-14">
+            <div><strong className="block text-2xl sm:text-3xl md:text-5xl">30+</strong><span className="block text-xs leading-snug text-white/60 md:text-sm">година искуства</span></div>
+            <div><strong className="block text-2xl sm:text-3xl md:text-5xl">5000+</strong><span className="block text-xs leading-snug text-white/60 md:text-sm">урађених кухиња</span></div>
+            <div><strong className="block text-2xl sm:text-3xl md:text-5xl">2010.</strong><span className="block text-xs leading-snug text-white/60 md:text-sm">признање „Златни дуб“</span></div>
           </div>
         </div>
       </section>
@@ -163,10 +163,10 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
       <section className="container mx-auto grid max-w-7xl gap-12 px-4 py-20 md:grid-cols-[0.8fr_1.2fr] md:px-6 md:py-32">
         <div>
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#C41E3A]">Ко смо ми</p>
-          <h2 className="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 md:text-5xl">Поносни на оно што је иза нас. Радознали за оно што долази.</h2>
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-4xl md:text-5xl">Поносни на оно што је иза нас. Радознали за оно што долази.</h2>
         </div>
         <div className="md:pt-10">
-          <p className="text-2xl font-medium leading-relaxed text-gray-800">Ми смо породична прича израсла из заната, дисциплине и дате ријечи.</p>
+          <p className="text-xl font-medium leading-relaxed text-gray-800 md:text-2xl">Ми смо породична прича израсла из заната, дисциплине и дате ријечи.</p>
           <p className="mt-7 text-lg leading-relaxed text-gray-600">Наше искуство се не мјери само годинама, него хиљадама простора, ријешених проблема и клијената који су нам се вратили. Сваки пројекат водимо од првог разговора у нашој канцеларији и мјерења простора, преко идејног рјешења, до производње и монтаже.</p>
           <div className="mt-10 flex items-center gap-4 border-l-2 border-[#C41E3A] pl-6">
             <BadgeCheck className="h-9 w-9 shrink-0 text-[#C41E3A]" />
@@ -180,7 +180,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
         <div className="container mx-auto max-w-7xl px-4 md:px-6">
           <div className="mb-16 max-w-3xl">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#E4B37B]">Историјат</p>
-            <h2 className="text-4xl font-extrabold tracking-tight md:text-6xl">Напредак који није прескочио ниједан корак.</h2>
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-6xl">Напредак који није прескочио ниједан корак.</h2>
           </div>
           <div className="relative grid gap-0 md:grid-cols-4">
             <div className="absolute left-0 right-0 top-4 hidden h-px bg-white/20 md:block" />
@@ -210,7 +210,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
         <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-3xl">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#C41E3A]">Тенденције у 2025.</p>
-            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 md:text-6xl">Опремите цијели стан — на једном мјесту.</h2>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-6xl">Опремите цијели стан — на једном мјесту.</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-600">Све више људи данас опрема цијели стан одједном — заједно са уређајима и свим детаљима. Зато не морате обилазити више продавница: када размишљате о опремању, дођите код нас. Од уређаја, преко окова, до елемената и намјештаја — све добијате на једном мјесту, усклађено и монтирано.</p>
           </div>
           <Button variant="outline" onClick={onNavigateGallery ?? onBack} className="shrink-0">Погледајте радове <ArrowRightIcon className="ml-2 h-4 w-4" /></Button>
@@ -218,7 +218,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
         <div className="grid gap-px overflow-hidden rounded-2xl bg-black/10 md:grid-cols-2 lg:grid-cols-4">
           {fullApartment.map(({ icon: Icon, number, title, text }) => (
             <article key={title} className="bg-white p-8 md:p-10">
-              <div className="mb-16 flex items-start justify-between"><Icon className="h-8 w-8 text-[#C41E3A]" /><span className="text-sm font-bold text-gray-300">{number}</span></div>
+              <div className="mb-8 flex items-start justify-between md:mb-16"><Icon className="h-8 w-8 text-[#C41E3A]" /><span className="text-sm font-bold text-gray-300">{number}</span></div>
               <h3 className="mb-4 text-2xl font-bold text-gray-900">{title}</h3>
               <p className="leading-relaxed text-gray-600">{text}</p>
             </article>
@@ -229,7 +229,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
       {/* Prednosti */}
       <section className="bg-white py-20 md:py-28">
         <div className="container mx-auto grid max-w-7xl gap-14 px-4 md:grid-cols-2 md:px-6">
-          <div className="relative min-h-[560px] overflow-hidden rounded-2xl">
+          <div className="relative min-h-[400px] overflow-hidden rounded-2xl md:min-h-[560px]">
             <img src={sideImage} alt="Намјештај по мјери из наше радионице" className="absolute inset-0 h-full w-full object-cover" />
             <div className="absolute inset-x-5 bottom-5 rounded-xl bg-white/95 p-6 backdrop-blur md:inset-x-8 md:bottom-8">
               <Sparkles className="mb-3 h-6 w-6 text-[#C41E3A]" />
@@ -238,7 +238,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
           </div>
           <div className="flex flex-col justify-center">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#C41E3A]">Предности нашег рада</p>
-            <h2 className="text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">Сами производимо. Ви слободно бирате.</h2>
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">Сами производимо. Ви слободно бирате.</h2>
             <p className="mt-6 text-lg leading-relaxed text-gray-600">Независност у производњи нам даје контролу над квалитетом, а сарадња са више произвођача материјала вама даје слободу избора — од економичних до премиум рјешења.</p>
             <div className="mt-10 space-y-7">
               {advantages.map(({ icon: Icon, title, text }) => (
@@ -258,7 +258,7 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
           <div className="grid gap-12 md:grid-cols-[1.2fr_0.8fr] md:items-end">
             <div>
               <Handshake className="mb-7 h-10 w-10 text-white/70" />
-              <h2 className="text-4xl font-extrabold tracking-tight md:text-6xl">Лојалност није програм. То је начин на који радимо.</h2>
+              <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-6xl">Лојалност није програм. То је начин на који радимо.</h2>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">Дугорочна сарадња се гради тако што се јавимо, поправимо, прилагодимо и останемо доступни и након монтаже. Највеће признање нам је када се клијент врати — или нас препоручи некоме до кога му је стало.</p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -274,10 +274,10 @@ export function AboutUsPage({ onBack, onContact, onNavigateGallery }: AboutUsPag
         <div className="container mx-auto flex max-w-7xl flex-col items-start justify-between gap-10 px-4 md:flex-row md:items-end md:px-6">
           <div className="max-w-3xl">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#E4B37B]">Сљедеће поглавље</p>
-            <h2 className="text-4xl font-extrabold tracking-tight md:text-6xl">Историја нам даје тежину. Ваш пројекат нам даје нови разлог.</h2>
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-6xl">Историја нам даје тежину. Ваш пројекат нам даје нови разлог.</h2>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/65">Договорите термин и дођите на разговор у нашу канцеларију — заједно ћемо погледати ваш простор, жеље и могућности.</p>
           </div>
-          <Button variant="secondary" size="lg" onClick={onContact}><PhoneIcon className="mr-2 h-5 w-5" /> Договорите термин</Button>
+          <Button variant="secondary" size="lg" onClick={onContact} className="w-full sm:w-auto"><PhoneIcon className="mr-2 h-5 w-5" /> Договорите термин</Button>
         </div>
       </section>
     </motion.div>

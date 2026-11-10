@@ -197,12 +197,13 @@ export function Contact() {
           className="mt-12 bg-[#C41E3A]/5 border border-[#C41E3A]/20 rounded-2xl p-6 text-center">
 
           <p className="text-gray-900 font-semibold mb-2">Радно вријеме</p>
-          <p className="text-gray-600">
-            Понедјељак - Петак:{' '}
-            <span className="font-bold text-gray-900">08:00 - 16:00</span> |{' '}
-            Субота:{' '}
-            <span className="font-bold text-gray-900">09:00 - 13:00</span>
-          </p>
+          <div className="flex flex-col items-center gap-1 text-gray-600 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-6">
+            {siteInfo.hours.map((h) =>
+            <span key={h.days}>
+                {h.days}: <span className="whitespace-nowrap font-bold text-gray-900">{h.time}</span>
+              </span>
+            )}
+          </div>
           <p className="text-sm text-gray-500 mt-2">
             Одговарамо на поруке и ван радног времена, али одговор можете
             очекивати сљедећег радног дана.

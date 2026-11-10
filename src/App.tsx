@@ -104,7 +104,7 @@ export function App() {
   const { page } = route;
 
   return (
-    <div className="min-h-screen bg-white font-['Montserrat',sans-serif] text-gray-900 selection:bg-[#C41E3A] selection:text-white">
+    <div className="min-h-screen overflow-x-hidden bg-white font-['Montserrat',sans-serif] text-gray-900 selection:bg-[#C41E3A] selection:text-white">
       <Header onNavigate={navigateTo} currentPage={page} />
       <main>
         {page === 'home' ? (

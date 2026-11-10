@@ -39,6 +39,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
     setIsMobileMenuOpen(false);
     onNavigate('aboutus');
   };
+  const isSolid = isScrolled || currentPage !== 'home';
   const navLinks = [
   {
     name: 'О нама',
@@ -60,7 +61,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled || currentPage !== 'home' ? 'bg-white/95 backdrop-blur-sm shadow-md py-3' : 'bg-transparent py-6'}`}>
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isSolid || isMobileMenuOpen ? 'bg-white/95 backdrop-blur-sm shadow-md py-2 lg:py-3' : 'bg-white/90 backdrop-blur-sm py-2 lg:bg-transparent lg:backdrop-blur-none lg:py-6'}`}>
 
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         <div className="flex items-center justify-between">
@@ -77,12 +78,12 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
             <img
               src="/logo_jocin.svg"
               alt="ЛОТО"
-              className="h-15 md:h-20" />
+              className="h-12 md:h-14 lg:h-20" />
           </a>
 
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) =>
             <a
               key={link.name}
@@ -108,11 +109,13 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-[#C41E3A]"
+            type="button"
+            className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#C41E3A] text-white shadow-md shadow-[#C41E3A]/30 transition-transform active:scale-95"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Отвори мени">
+            aria-label={isMobileMenuOpen ? 'Затвори мени' : 'Отвори мени'}
+            aria-expanded={isMobileMenuOpen}>
 
-            {isMobileMenuOpen ? <X /> : <Menu />}
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
       </div>
@@ -133,14 +136,14 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
             opacity: 0,
             height: 0
           }}
-          className="md:hidden bg-white border-t border-gray-100 overflow-hidden">
+          className="lg:hidden bg-white border-t border-gray-100 overflow-hidden">
 
-            <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-1">
               {navLinks.map((link) =>
             <a
               key={link.name}
               href={link.href}
-              className="text-lg font-semibold text-gray-800 py-2 border-b border-gray-50"
+              className={`text-base font-semibold py-3 border-b border-gray-100 ${currentPage === 'aboutus' && link.name === 'О нама' ? 'text-[#C41E3A]' : 'text-gray-800'}`}
               onClick={(e) => {
                 e.preventDefault();
                 if ('isPage' in link && link.isPage) {
@@ -153,7 +156,8 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                   {link.name}
                 </a>
             )}
-              <Button className="w-full mt-2" onClick={handleContactClick}>
+              <Button className="w-full mt-4" onClick={handleContactClick}>
+                <Phone className="w-4 h-4 mr-2" />
                 Бесплатна консултација
               </Button>
             </div>
